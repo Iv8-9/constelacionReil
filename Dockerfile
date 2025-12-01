@@ -13,18 +13,29 @@ RUN apt-get update && apt-get install -y \
 # Instalar Flutter
 RUN curl -L https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.1-stable.tar.xz | tar -C /opt -xJ
 
+# Configurar Git safe directory y Flutter
+RUN git config --global --add safe.directory /opt/flutter && \
+    /opt/flutter/bin/flutter config --enable-web && \
+    /opt/flutter/bin/flutter --version
+
 # Configurar environment PATH
 ENV PATH="$PATH:/opt/flutter/bin"
 
-# Configurar Flutter para web
-RUN flutter config --enable-web
-RUN flutter doctor
+# Crear usuario no-root para Flutter
+RUN useradd -m -u 1000 flutteruser && \
+    chown -R flutteruser:flutteruser /opt/flutter
+
+# Crear directorio de la app y cambiar propietario
+RUN mkdir /app && chown flutteruser:flutteruser /app
+
+# Cambiar a usuario no-root
+USER flutteruser
 
 # Copiar código de la aplicación
-COPY . /app
+COPY --chown=flutteruser:flutteruser . /app
 WORKDIR /app
 
-# Obtener dependencias USANDO FLUTTER, no dart
+# Obtener dependencias
 RUN flutter pub get
 
 # Build para web

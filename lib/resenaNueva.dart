@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'package:constelacion/libreriaPage.dart';
 import 'package:constelacion/main_layout.dart';
 import 'package:constelacion/models/ambiente.dart';
 import 'package:constelacion/models/resenaModel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:constelacion/theme/app_strings.dart';
 
 class resenaNueva extends StatefulWidget {
   final int idResena;

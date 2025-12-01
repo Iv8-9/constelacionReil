@@ -2,10 +2,9 @@ import 'dart:convert';
 import 'package:constelacion/models/lectorModel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:constelacion/models/loginModel.dart';
 import 'usuariosNuevo.dart';
 import 'models/ambiente.dart';
-import 'usuariosNuevo.dart';
+
 
 class UsuariosPage extends StatefulWidget {
   const UsuariosPage({super.key});

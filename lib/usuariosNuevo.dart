@@ -4,8 +4,6 @@ import 'package:constelacion/theme/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:constelacion/models/ambiente.dart';
-import 'package:constelacion/usuariosPage.dart';
-import 'package:constelacion/models/lectorModel.dart';
 import 'package:quickalert/quickalert.dart';
 
 class Usuariosnuevo extends StatefulWidget {

@@ -1,0 +1,24 @@
+[phases.setup]
+cmds = [
+  "apt-get update && apt-get install -y curl unzip xz-utils git bash libssl-dev",
+  # Instalar Flutter
+  "curl -L https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.1-stable.tar.xz | tar -C /opt -xJ",
+  "export PATH=\"$PATH:/opt/flutter/bin\"",
+  "flutter precache --web"
+]
+
+[phases.install]
+cmds = [
+  "export PATH=\"$PATH:/opt/flutter/bin\"",
+  "flutter config --enable-web",
+  "flutter pub get"
+]
+
+[phases.build]
+cmds = [
+  "export PATH=\"$PATH:/opt/flutter/bin\"",
+  "flutter build web --release --web-renderer canvaskit"
+]
+
+[start]
+cmd = "/opt/flutter/bin/flutter run -d web-server --web-port $PORT --web-hostname 0.0.0.0"
